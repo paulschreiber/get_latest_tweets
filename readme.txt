@@ -1,6 +1,6 @@
 === Get Posts ===
 Author URI: http://paulschreiber.com/
-Plugin URI: http://paulschreiber.com/blog/2011/02/04/how-to-display-the-latest-blog-post-on-a-wordpress-page/
+Plugin URI: http://paulschreiber.com/blog/2011/02/11/how-to-display-tweets-on-a-wordpress-page/
 Contributors: paulschreiber
 Tags: get_latest_tweets, tweet, tweets, twitter, formatting, list, shortcode
 Requires at least: 3.0.4

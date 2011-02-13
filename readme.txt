@@ -15,14 +15,10 @@ This plugin adds the ability to put a shortcode tag in any static page or post a
 
 It generates markup like this, which you can style as desired:
 
-`<ul class='tweets'>`
-`<li>@<a class='atreply' href='http://twitter.com/jane'>jane</a> Please dance a jig.`
-`<span class='date'><a href='http://twitter.com/me/status/2345'>3 hours ago</a></span></li>`
-`<li>Anyone used TotalFinder? <a href='http://t.co/blah'>http://t.co/blah</a> Saw it`
-`on @<a class='atreply' href='http://twitter.com/bob'>bob</a>'s machine and am intrigued. `
-`<span class='date'><a href='http://twitter.com/me/status/1234'>6 hours ago</a></span></li>`
-`</ul>`
-
+    <ul class='tweets'>
+    <li>@<a class='atreply' href='http://twitter.com/jane'>jane</a> Please dance a jig. <span class='date'><a href='http://twitter.com/me/status/2345'>3 hours ago</a></span></li>
+    <li>Anyone used TotalFinder? <a href='http://t.co/blah'>http://t.co/blah</a> Saw it on @<a class='atreply' href='http://twitter.com/bob'>bob</a>'s machine and am intrigued. <span class='date'><a href='http://twitter.com/me/status/1234'>6 hours ago</a></span></li>
+    </ul>
 
 == Installation ==
 

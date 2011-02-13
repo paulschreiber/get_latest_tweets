@@ -1,4 +1,4 @@
-=== Get Posts ===
+=== Get Latest Tweets ===
 Author URI: http://paulschreiber.com/
 Plugin URI: http://paulschreiber.com/blog/2011/02/11/how-to-display-tweets-on-a-wordpress-page/
 Contributors: paulschreiber

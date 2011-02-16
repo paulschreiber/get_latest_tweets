@@ -3,7 +3,7 @@
 Plugin Name: Get Latest Tweets
 Plugin URI: http://paulschreiber.com/blog/2011/02/11/how-to-display-tweets-on-a-wordpress-page/
 Description: Adds a shortcode tag [get_latest_tweets] to display an recent tweets
-Version: 0.1
+Version: 0.1.1
 Author: Paul Schreiber
 Author URI: http://paulschreiber.com/
 */
@@ -166,7 +166,7 @@ function get_latest_tweets_html($attributes) {
 	$content = "<ul class='tweets'>\n";
 	foreach ($tweetData as $index => $tweet) {
 		if ($index == $count) break;
-		$content .= "<li>" . format_tweet($tweet["text"]) . " <span class='date'><a href='http://twitter.com/" . $username . "/status/" . $tweet["id"] . "'>" . time_ago($tweet["created_at"]) . "</a></span></li>\n";
+		$content .= "<li>" . format_tweet($tweet["text"]) . " <span class='date'><a href='http://twitter.com/" . $username . "/status/" . $tweet["id_str"] . "'>" . time_ago($tweet["created_at"]) . "</a></span></li>\n";
 	}
 	$content .= "</ul>\n";
 

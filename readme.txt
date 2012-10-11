@@ -5,7 +5,7 @@ Contributors: paulschreiber
 Tags: get_latest_tweets, tweet, tweets, twitter, formatting, list, shortcode
 Requires at least: 3.0.4
 Tested up to: 3.0.5
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 
 Adds a shortcode tag [get_latest_tweets username='somename'] to display an excerpt from your latest blog post.
 

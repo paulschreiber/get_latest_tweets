@@ -68,7 +68,7 @@ function time_ago($then) {
 }
 
 function get_json_from_twitter($username, $count) {
-	$url = "http://twitter.com/status/user_timeline/$username.json";
+	$url = "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=$username";
 	$json = file_get_contents($url);
 	return $json;
 }

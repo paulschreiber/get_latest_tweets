@@ -29,6 +29,9 @@ It generates markup like this, which you can style as desired:
 
 == Changelog ==
 
+= 0.1.2 =
+* Updated for new twitter API (thanks, @byjuhohn)
+
 = 0.1.1 =
 * Fixed tweet permalinks (credit: Wouter den Boer)
 

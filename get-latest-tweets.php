@@ -3,7 +3,7 @@
 Plugin Name: Get Latest Tweets
 Plugin URI: http://paulschreiber.com/blog/2011/02/11/how-to-display-tweets-on-a-wordpress-page/
 Description: Adds a shortcode tag [get_latest_tweets] to display an recent tweets
-Version: 0.1.1
+Version: 0.1.3
 Author: Paul Schreiber
 Author URI: http://paulschreiber.com/
 */

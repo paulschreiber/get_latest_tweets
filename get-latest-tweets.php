@@ -8,7 +8,7 @@ Author: Paul Schreiber
 Author URI: http://paulschreiber.com/
 */
 
-/*  Copyright 2011 Paul Schreiber <paul at paulschreiber.com>
+/*  Copyright 2011-12 Paul Schreiber <paul at paulschreiber.com>
 
     Released under the GPL, version 2.
 

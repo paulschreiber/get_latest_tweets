@@ -3,16 +3,18 @@
 Plugin Name: Get Latest Tweets
 Plugin URI: http://paulschreiber.com/blog/2011/02/11/how-to-display-tweets-on-a-wordpress-page/
 Description: Adds a shortcode tag [get_latest_tweets] to display an recent tweets
-Version: 0.1.3
+Version: 0.2.0
 Author: Paul Schreiber
 Author URI: http://paulschreiber.com/
 */
 
-/*  Copyright 2011-12 Paul Schreiber <paul at paulschreiber.com>
+/*  Copyright 2011-13 Paul Schreiber <paul at paulschreiber.com>
 
     Released under the GPL, version 2.
 
-		formatting code adapted from Twitter http://twitter.com/javascripts/widgets/widget.js 
+		formatting code adapted from Twitter http://twitter.com/javascripts/widgets/widget.js
+    includes tmhOAuth from https://github.com/themattharris/tmhOAuth/
+    (which includes cacert.pem from http://curl.haxx.se/ca/cacert.pem)
 */
 
 $gltCacheLiveTime = 30; // 24 seconds == 150 (rate limit per hour) / 60 (minutes)
@@ -26,7 +28,7 @@ function time_ago($then) {
 	$hour = $minute * 60;
 	$day = $hour * 24;
 	$week = $day * 7;
-	
+
 	if (is_nan($diff) || $diff < 0) {
 	  return ""; // return blank string if unknown
 	}
@@ -68,9 +70,37 @@ function time_ago($then) {
 }
 
 function get_json_from_twitter($username, $count) {
-	$url = "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=$username";
-	$json = file_get_contents($url);
-	return $json;
+  require 'tmhOAuth.php';
+
+  $configFilePath = dirname(__FILE__) . DIRECTORY_SEPARATOR . "twitter.api.keys.json";
+  if (!file_exists($configFilePath)) {
+    die("Could not find config file ($configFilePath)");
+  }
+
+  $rawConfig = file_get_contents($configFilePath);
+  if (!$rawConfig) {
+    die("Could not read config file ($configFilePath)");
+  }
+
+
+  $config = json_decode($rawConfig);
+
+  $tmhOAuth = new tmhOAuth(array(
+    'consumer_key'    => $config->consumer_key,
+    'consumer_secret' => $config->consumer_secret,
+    'user_token'      => $config->user_token,
+    'user_secret'     => $config->user_secret
+  ));
+
+  $code = $tmhOAuth->request('GET', $tmhOAuth->url('1.1/statuses/user_timeline'), array(
+    'screen_name' => $username));
+  $json = $tmhOAuth->response["response"];
+
+  if (!$json) {
+    die("Could not get JSON data from Twitter");
+  }
+
+  return $json;
 }
 
 function cache_file_name($username) {
@@ -79,19 +109,19 @@ function cache_file_name($username) {
 
 function cache_json($username, $count) {
 	$cacheDirectory = dirname($GLOBALS["gltCachePath"]);
-	
+
 	if (!file_exists($cacheDirectory)) {
 		if (!mkdir($cacheDirectory)) {
 			die("Could not create cache directory. Make sure " . dirname($cacheDirectory) . " is writable by the web server." );
 		}
 	}
-	
+
 	if (!file_exists($GLOBALS["gltCachePath"])) {
 		if (!mkdir($GLOBALS["gltCachePath"])) {
 			die("Could not create cache directory. Make sure " . dirname($GLOBALS["gltCachePath"]) . " is writable by the web server." );
 		}
 	}
-	
+
 	$json = get_json_from_twitter($username, $count);
 	return file_put_contents(cache_file_name($username), $json);
 }
@@ -107,12 +137,12 @@ function get_json($username, $count) {
 	if ((file_exists($cacheFile) && filesize($cacheFile))) {
 		$cacheInfo = stat($cacheFile);
 		$modTime = $cacheInfo[9];
-		
+
 		if ( (time() - $modTime) < $GLOBALS["gltCacheLiveTime"] ) {
 			$staleCache = false;
 		}
 	}
-	
+
 	if ($staleCache) {
 		if (!cache_json($username, $count)) {
 			die("Could not write to JSON cache. Make sure " . $GLOBALS["gltCachePath"] . " is writeable by the web server");
@@ -140,7 +170,7 @@ function format_tweet($tweet) {
 						$tweet_text);
 		}
 	}
-	
+
 	return $tweet_text;
 }
 
@@ -150,19 +180,19 @@ function get_latest_tweets_html($attributes) {
 			'username' => null,
 			'count' => 5,
 		), $attributes ) );
-		
+
 	$count = intval($count);
 	if ($count < 1 or $count > 100) {
 		return "Numbers of tweets must be between 1 and 100.";
 	}
-	
+
 	if (!$username) {
 		return "Please specify a twitter username";
 	}
 
 	$json = get_json($username, $count);
 	$tweetData = json_decode($json, true);
-	
+
 	$content = "<ul class='tweets'>\n";
 	foreach ($tweetData as $index => $tweet) {
 		if ($index == $count) break;

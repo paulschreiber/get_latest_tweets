@@ -4,8 +4,8 @@ Plugin URI: http://paulschreiber.com/blog/2011/02/11/how-to-display-tweets-on-a-
 Contributors: paulschreiber
 Tags: get_latest_tweets, tweet, tweets, twitter, formatting, list, shortcode
 Requires at least: 3.0.4
-Tested up to: 3.5.1
-Stable tag: 0.2.0
+Tested up to: 4.1
+Stable tag: 0.2.1
 
 Adds a shortcode tag [get_latest_tweets username='somename'] to display an excerpt from your latest blog post.
 
@@ -29,6 +29,9 @@ It generates markup like this, which you can style as desired:
 1. Place `[get_latest_tweets username="somename"]` in your pages.
 
 == Changelog ==
+
+= 0.2.1 =
+* WordPress VIP coding standards; updated "tested up to"
 
 = 0.2.0 =
 * Now uses version 1.1 of the Twitter API -- requires Twitter API credentials

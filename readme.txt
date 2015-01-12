@@ -5,7 +5,7 @@ Contributors: paulschreiber
 Tags: get_latest_tweets, tweet, tweets, twitter, formatting, list, shortcode
 Requires at least: 3.0.4
 Tested up to: 4.1
-Stable tag: 0.2.1
+Stable tag: 0.2.2
 
 Adds a shortcode tag [get_latest_tweets username='somename'] to display an excerpt from your latest blog post.
 
@@ -30,8 +30,11 @@ It generates markup like this, which you can style as desired:
 
 == Changelog ==
 
+= 0.2.2 =
+* WordPress VIP coding standards; updated "tested up to" to 4.1
+
 = 0.2.1 =
-* WordPress VIP coding standards; updated "tested up to"
+* "Tested up to" updated to 3.9.1
 
 = 0.2.0 =
 * Now uses version 1.1 of the Twitter API -- requires Twitter API credentials
